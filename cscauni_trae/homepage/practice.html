@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟练习 - CSCA小站</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="practice.css">
+    <!-- 引入Google字体 Noto Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- A区：固定导航栏 -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Logo区域 -->
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="logo-text">CSCA</span>
+                </a>
+            </div>
+            
+            <!-- 导航菜单 -->
+            <nav class="nav-menu">
+                <a href="index.html#home" class="nav-link" data-i18n="nav.home">首页</a>
+                <a href="practice.html" class="nav-link active" data-i18n="nav.practice">考试模拟</a>
+                <a href="index.html#news" class="nav-link" data-i18n="nav.news">官方资讯</a>
+            </nav>
+            
+            <!-- 右侧功能区 -->
+            <div class="nav-right">
+                <!-- 语言切换 -->
+                <div class="language-switch">
+                    <button class="lang-btn active" data-lang="zh">中文</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+                
+                <!-- 登录/注册按钮（未登录状态） -->
+                <div class="auth-buttons" id="authButtons">
+                    <button class="btn-login" data-i18n="auth.login">登录</button>
+                    <button class="btn-register" data-i18n="auth.register">注册</button>
+                </div>
+                
+                <!-- 用户信息（登录后显示） -->
+                <div class="user-info" id="userInfo" style="display: none;">
+                    <img src="https://via.placeholder.com/32" alt="头像" class="user-avatar">
+                    <span class="user-name" data-i18n="auth.profile">个人中心</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 练习页面主内容区 -->
+    <main class="practice-page" style="margin-top: 70px;">
+        <div class="practice-container">
+            <!-- 顶部信息栏 -->
+            <div class="practice-header">
+                <div class="practice-info">
+                    <h1 class="practice-title" id="practiceSubject">中文模拟练习</h1>
+                    <p class="practice-subtitle" id="practiceMode">模拟考试模式</p>
+                </div>
+                <div class="practice-timer">
+                    <div class="timer-label">剩余时间</div>
+                    <div class="timer-display" id="timerDisplay">60:00</div>
+                    <button class="btn-submit" id="submitBtn">提交试卷</button>
+                </div>
+            </div>
+
+            <!-- 科目选择区域 -->
+            <div class="subject-selector">
+                <h3 class="selector-title">选择科目</h3>
+                <div class="subject-buttons" id="subjectButtons">
+                    <!-- 科目按钮将通过JavaScript动态生成 -->
+                </div>
+            </div>
+
+            <!-- 套题选择区域 -->
+            <div class="test-set-selector">
+                <h3 class="selector-title">选择套题</h3>
+                <div class="test-set-buttons" id="testSetButtons">
+                    <!-- 套题按钮将通过JavaScript动态生成 -->
+                </div>
+            </div>
+
+            <!-- 主要内容区域 -->
+            <div class="practice-content">
+                <!-- 左侧：题目区域 -->
+                <div class="question-area">
+                    <!-- 题目导航栏 -->
+                    <div class="question-nav">
+                        <div class="nav-info">
+                            <span>题目 <span id="currentQuestionNum">1</span> / <span id="totalQuestions">10</span></span>
+                        </div>
+                        <div class="nav-actions">
+                            <button class="btn-nav" id="prevBtn">上一题</button>
+                            <button class="btn-nav" id="nextBtn">下一题</button>
+                        </div>
+                    </div>
+
+                    <!-- 题目卡片 -->
+                    <div class="question-card" id="questionCard">
+                        <!-- 题目类型标签 -->
+                        <div class="question-type" id="questionType">单选题</div>
+                        
+                        <!-- 题目内容 -->
+                        <div class="question-content">
+                            <h3 class="question-title" id="questionTitle">题目内容将在这里显示</h3>
+                            
+                            <!-- 题目选项（单选题/多选题） -->
+                            <div class="question-options" id="questionOptions">
+                                <!-- 选项将通过JavaScript动态生成 -->
+                            </div>
+                        </div>
+
+                        <!-- 题目操作按钮 -->
+                        <div class="question-actions">
+                            <button class="btn-mark" id="markBtn">
+                                <span class="mark-icon">⭐</span>
+                                <span id="markText">标记题目</span>
+                            </button>
+                            <button class="btn-clear" id="clearBtn">清除答案</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧：题目列表和统计 -->
+                <div class="sidebar">
+                    <!-- 答题进度 -->
+                    <div class="progress-card">
+                        <h3 class="sidebar-title">答题进度</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-stats">
+                            <span>已答：<strong id="answeredCount">0</strong></span>
+                            <span>未答：<strong id="unansweredCount">10</strong></span>
+                            <span>已标记：<strong id="markedCount">0</strong></span>
+                        </div>
+                    </div>
+
+                    <!-- 题目导航网格 -->
+                    <div class="question-grid-card">
+                        <h3 class="sidebar-title">题目导航</h3>
+                        <div class="question-grid" id="questionGrid">
+                            <!-- 题目编号按钮将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+
+                    <!-- 操作按钮 -->
+                    <div class="action-buttons">
+                        <button class="btn-action" id="checkAnswerBtn">查看答案</button>
+                        <button class="btn-action" id="resetBtn">重新开始</button>
+                        <button class="btn-action secondary" id="backHomeBtn">返回首页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 提交确认弹窗 -->
+    <div class="modal-overlay" id="submitModal" style="display: none;">
+        <div class="modal-content">
+            <h3 class="modal-title">确认提交</h3>
+            <p class="modal-text">您确定要提交试卷吗？提交后将无法修改答案。</p>
+            <div class="modal-stats">
+                <p>已答题数：<span id="modalAnswered">0</span> / <span id="modalTotal">10</span></p>
+                <p>未答题数：<span id="modalUnanswered">10</span></p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal cancel" id="cancelSubmitBtn">取消</button>
+                <button class="btn-modal confirm" id="confirmSubmitBtn">确认提交</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 答案显示弹窗 -->
+    <div class="modal-overlay" id="answerModal" style="display: none;">
+        <div class="modal-content answer-modal">
+            <h3 class="modal-title">题目答案</h3>
+            <div class="answer-content" id="answerContent">
+                <!-- 答案内容将通过JavaScript动态生成 -->
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal confirm" id="closeAnswerBtn">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入JavaScript文件 -->
+    <script src="script.js"></script>
+    <script src="practice.js"></script>
+</body>
+</html>
+

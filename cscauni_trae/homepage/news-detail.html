@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻详情 - CSCA小站</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .news-detail-container {
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: var(--spacing-md);
+            background-color: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+        .news-detail-header {
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--primary-blue);
+        }
+        .news-detail-title {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-sm);
+        }
+        .news-detail-meta {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+        .news-detail-content {
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-top: var(--spacing-md);
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: var(--spacing-md);
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: var(--light-blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏（复用首页的导航栏） -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="logo-text">CSCA</span>
+                </a>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html#home" class="nav-link">首页</a>
+                <a href="index.html#practice" class="nav-link">考试模拟</a>
+                <a href="index.html#news" class="nav-link active">官方资讯</a>
+            </nav>
+            <div class="nav-right">
+                <div class="language-switch">
+                    <button class="lang-btn active" data-lang="zh">中文</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+                <div class="auth-buttons" id="authButtons">
+                    <button class="btn-login">登录</button>
+                    <button class="btn-register">注册</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 新闻详情内容 -->
+    <div class="news-detail-container">
+        <div class="news-detail-header">
+            <h1 class="news-detail-title" id="newsTitle">新闻标题</h1>
+            <div class="news-detail-meta">
+                <span id="newsDate">2025-01-15</span> | 
+                <span id="newsSource">来源：教育部</span>
+            </div>
+        </div>
+        <div class="news-detail-content" id="newsContent">
+            <p>这里是新闻的详细内容。点击首页的新闻标题后，会跳转到这个详情页面。</p>
+            <p>在实际项目中，这里应该显示从服务器获取的完整新闻内容。</p>
+            <p>目前这是一个示例页面，用于演示新闻点击跳转功能。</p>
+        </div>
+        <a href="index.html#news" class="back-button">← 返回新闻列表</a>
+    </div>
+
+    <script>
+        // 从URL参数中获取新闻信息
+        const urlParams = new URLSearchParams(window.location.search);
+        const newsId = urlParams.get('id');
+        const newsTitle = decodeURIComponent(urlParams.get('title') || '新闻标题');
+        
+        // 更新页面标题和内容
+        if (newsTitle) {
+            document.getElementById('newsTitle').textContent = newsTitle;
+            document.title = newsTitle + ' - CSCA小站';
+        }
+        
+        // 根据新闻ID显示不同的内容（示例）
+        const newsContents = {
+            '1': '教育部正式公布2025年CSCA考试时间安排，全年共设4次考试。第一次考试将于3月举行，第二次考试将于6月举行，第三次考试将于9月举行，第四次考试将于12月举行。考生可根据自己的时间安排选择合适的考试时间。',
+            '2': '留基委发布最新奖学金申请指南，新增多项资助项目。本次更新主要针对来华留学生的奖学金申请流程进行了优化，简化了申请步骤，提高了申请效率。',
+            '3': '为简化申请流程，成绩认证系统已全面升级。新系统支持在线申请、在线查询，大大提高了办事效率。',
+            // 可以继续添加更多新闻内容...
+        };
+        
+        if (newsId && newsContents[newsId]) {
+            document.getElementById('newsContent').innerHTML = '<p>' + newsContents[newsId] + '</p>';
+        }
+    </script>
+</body>
+</html>
+
+

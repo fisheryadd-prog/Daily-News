@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSCA小站 - 来华留学本科入学学业水平测试</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- 引入Google字体 Noto Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- A区：固定导航栏 -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Logo区域 -->
+            <div class="logo">
+                <span class="logo-text">CSCA</span>
+            </div>
+            
+            <!-- 导航菜单 -->
+            <nav class="nav-menu">
+                <a href="#home" class="nav-link active" data-i18n="nav.home">首页</a>
+                <a href="#practice" class="nav-link" data-i18n="nav.practice">考试模拟</a>
+                <a href="#news" class="nav-link" data-i18n="nav.news">官方资讯</a>
+            </nav>
+            
+            <!-- 右侧功能区 -->
+            <div class="nav-right">
+                <!-- 语言切换 -->
+                <div class="language-switch">
+                    <button class="lang-btn active" data-lang="zh">中文</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+                
+                <!-- 登录/注册按钮（未登录状态） -->
+                <div class="auth-buttons" id="authButtons">
+                    <button class="btn-login" data-i18n="auth.login">登录</button>
+                    <button class="btn-register" data-i18n="auth.register">注册</button>
+                </div>
+                
+                <!-- 用户信息（登录后显示） -->
+                <div class="user-info" id="userInfo" style="display: none;">
+                    <img src="https://via.placeholder.com/32" alt="头像" class="user-avatar">
+                    <span class="user-name" data-i18n="auth.profile">个人中心</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- B区：首屏Banner区 -->
+    <section class="banner" id="home">
+        <div class="banner-background"></div>
+        <div class="banner-container">
+            <!-- 左侧内容 -->
+            <div class="banner-left">
+                <h1 class="banner-title" data-i18n="banner.title">来华留学本科入学学业水平测试（CSCA）</h1>
+                <p class="banner-subtitle" data-i18n="banner.subtitle">权威考试 · 智能学习 · 全球升学</p>
+                
+                <!-- 考试倒计时 -->
+                <div class="countdown-container">
+                    <div class="countdown-label" data-i18n="banner.countdown.label">距离下次考试还有：</div>
+                    <div class="countdown" id="countdown">
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="days">00</span>
+                            <span class="countdown-unit" data-i18n="banner.countdown.days">天</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="hours">00</span>
+                            <span class="countdown-unit" data-i18n="banner.countdown.hours">时</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="minutes">00</span>
+                            <span class="countdown-unit" data-i18n="banner.countdown.minutes">分</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="seconds">00</span>
+                            <span class="countdown-unit" data-i18n="banner.countdown.seconds">秒</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧内容：官方公告滚动栏 -->
+            <div class="banner-right">
+                <div class="announcement-header">
+                    <h3 data-i18n="banner.announcement.title">📢 官方公告</h3>
+                </div>
+                <div class="announcement-carousel" id="announcementCarousel">
+                    <div class="announcement-item active">
+                        <div class="announcement-source" data-i18n="banner.announcement.source1">教育部</div>
+                        <div class="announcement-title" data-i18n="banner.announcement.title1">2025年CSCA考试报名通知</div>
+                        <div class="announcement-date">2025-01-15</div>
+                    </div>
+                    <div class="announcement-item">
+                        <div class="announcement-source" data-i18n="banner.announcement.source2">留基委</div>
+                        <div class="announcement-title" data-i18n="banner.announcement.title2">来华留学奖学金申请指南更新</div>
+                        <div class="announcement-date">2025-01-12</div>
+                    </div>
+                    <div class="announcement-item">
+                        <div class="announcement-source" data-i18n="banner.announcement.source3">高校</div>
+                        <div class="announcement-title" data-i18n="banner.announcement.title3">多所高校公布CSCA成绩要求</div>
+                        <div class="announcement-date">2025-01-10</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C区：科目学习区 -->
+    <section class="practice-center" id="practice">
+        <div class="container">
+            <h2 class="section-title" data-i18n="practice.title">🎓 CSCA练习中心</h2>
+            <p class="section-subtitle" data-i18n="practice.subtitle">选择科目，开始你的学习之旅</p>
+            
+            <div class="subject-grid">
+                <!-- 科目卡片1：中文 -->
+                <div class="subject-card">
+                    <div class="subject-icon">📝</div>
+                    <h3 class="subject-name" data-i18n="practice.subject1.name">中文</h3>
+                    <p class="subject-desc" data-i18n="practice.subject1.desc">提升中文表达力，掌握学术写作</p>
+                    <button class="btn-practice" data-i18n="practice.btn">进入练习</button>
+                    <div class="subject-menu">
+                        <a href="#" class="menu-item" data-i18n="practice.menu.exam">考试说明</a>
+                        <a href="#" class="menu-item" data-i18n="practice.menu.test">模拟题库</a>
+                    </div>
+                </div>
+                
+                <!-- 科目卡片2：数学 -->
+                <div class="subject-card">
+                    <div class="subject-icon">🔢</div>
+                    <h3 class="subject-name" data-i18n="practice.subject2.name">数学</h3>
+                    <p class="subject-desc" data-i18n="practice.subject2.desc">掌握基础数学知识，提升解题能力</p>
+                    <button class="btn-practice" data-i18n="practice.btn">进入练习</button>
+                    <div class="subject-menu">
+                        <a href="#" class="menu-item" data-i18n="practice.menu.exam">考试说明</a>
+                        <a href="#" class="menu-item" data-i18n="practice.menu.test">模拟题库</a>
+                    </div>
+                </div>
+                
+                <!-- 科目卡片3：物理 -->
+                <div class="subject-card">
+                    <div class="subject-icon">⚛️</div>
+                    <h3 class="subject-name" data-i18n="practice.subject3.name">物理</h3>
+                    <p class="subject-desc" data-i18n="practice.subject3.desc">掌握物理基础理论，提升实验分析能力</p>
+                    <button class="btn-practice" data-i18n="practice.btn">进入练习</button>
+                    <div class="subject-menu">
+                        <a href="#" class="menu-item" data-i18n="practice.menu.exam">考试说明</a>
+                        <a href="#" class="menu-item" data-i18n="practice.menu.test">模拟题库</a>
+                    </div>
+                </div>
+                
+                <!-- 科目卡片4：化学 -->
+                <div class="subject-card">
+                    <div class="subject-icon">🧪</div>
+                    <h3 class="subject-name" data-i18n="practice.subject4.name">化学</h3>
+                    <p class="subject-desc" data-i18n="practice.subject4.desc">理解化学原理，掌握实验操作技能</p>
+                    <button class="btn-practice" data-i18n="practice.btn">进入练习</button>
+                    <div class="subject-menu">
+                        <a href="#" class="menu-item" data-i18n="practice.menu.exam">考试说明</a>
+                        <a href="#" class="menu-item" data-i18n="practice.menu.test">模拟题库</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- E区：官方资讯与政策公告区 -->
+    <section class="news-section" id="news">
+        <div class="container">
+            <h2 class="section-title" data-i18n="news.title">📰 考试公告与最新资讯</h2>
+            
+            <div class="news-grid">
+                <!-- 左栏：教育部/留基委公告 -->
+                <div class="news-column">
+                    <h3 class="news-column-title" data-i18n="news.column1.title">教育部 / 留基委公告</h3>
+                    <div class="news-list">
+                        <article class="news-item">
+                            <div class="news-date">2025-01-15</div>
+                            <h4 class="news-title">2025年CSCA考试时间安排公布</h4>
+                            <p class="news-excerpt">教育部正式公布2025年CSCA考试时间安排，全年共设4次考试...</p>
+                        </article>
+                        <article class="news-item">
+                            <div class="news-date">2025-01-12</div>
+                            <h4 class="news-title">来华留学奖学金政策更新</h4>
+                            <p class="news-excerpt">留基委发布最新奖学金申请指南，新增多项资助项目...</p>
+                        </article>
+                        <article class="news-item">
+                            <div class="news-date">2025-01-08</div>
+                            <h4 class="news-title">CSCA成绩认证流程优化</h4>
+                            <p class="news-excerpt">为简化申请流程，成绩认证系统已全面升级...</p>
+                        </article>
+                    </div>
+                </div>
+                
+                <!-- 中栏：高校新闻 -->
+                <div class="news-column">
+                    <h3 class="news-column-title" data-i18n="news.column2.title">高校新闻</h3>
+                    <div class="news-list">
+                        <article class="news-item">
+                            <div class="news-date">2025-01-14</div>
+                            <h4 class="news-title">清华大学公布2025年CSCA录取分数线</h4>
+                            <p class="news-excerpt">清华大学正式公布2025年本科留学生CSCA成绩要求...</p>
+                        </article>
+                        <article class="news-item">
+                            <div class="news-date">2025-01-11</div>
+                            <h4 class="news-title">北京大学新增留学生专业方向</h4>
+                            <p class="news-excerpt">北京大学宣布新增多个面向留学生的本科专业...</p>
+                        </article>
+                        <article class="news-item">
+                            <div class="news-date">2025-01-09</div>
+                            <h4 class="news-title">复旦大学举办CSCA备考讲座</h4>
+                            <p class="news-excerpt">复旦大学将于本月底举办CSCA考试备考指导讲座...</p>
+                        </article>
+                    </div>
+                </div>
+                
+                <!-- 右栏：使领馆动态与签证信息 -->
+                <div class="news-column">
+                    <h3 class="news-column-title" data-i18n="news.column3.title">使领馆动态与签证信息</h3>
+                    <div class="news-list">
+                        <article class="news-item">
+                            <div class="news-date">2025-01-13</div>
+                            <h4 class="news-title">中国驻美使馆更新留学签证政策</h4>
+                            <p class="news-excerpt">中国驻美使馆发布最新来华留学签证申请指南...</p>
+                        </article>
+                        <article class="news-item">
+                            <div class="news-date">2025-01-10</div>
+                            <h4 class="news-title">来华留学生健康证明要求调整</h4>
+                            <p class="news-excerpt">根据最新政策，来华留学生健康证明要求有所调整...</p>
+                        </article>
+                        <article class="news-item">
+                            <div class="news-date">2025-01-07</div>
+                            <h4 class="news-title">多国使领馆联合举办留学说明会</h4>
+                            <p class="news-excerpt">多国使领馆将于下月联合举办来华留学说明会...</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- G区：页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- 左侧：Logo + 简介 + 联系方式 -->
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <span class="logo-text">CSCA</span>
+                    </div>
+                    <p class="footer-desc" data-i18n="footer.desc">来华留学本科入学学业水平测试官方学习平台，为全球学生提供权威的考试资源和学习指导。</p>
+                    <div class="footer-contact">
+                        <p data-i18n="footer.email">📧 邮箱：info@csca.edu.cn</p>
+                        <p data-i18n="footer.phone">📞 热线：400-123-4567</p>
+                    </div>
+                </div>
+                
+                <!-- 中间：快速导航 -->
+                <div class="footer-center">
+                    <h4 class="footer-title" data-i18n="footer.nav.title">快速导航</h4>
+                    <ul class="footer-links">
+                        <li><a href="#practice" data-i18n="footer.nav.practice">练习中心</a></li>
+                        <li><a href="#" data-i18n="footer.nav.scores">院校成绩</a></li>
+                        <li><a href="#" data-i18n="footer.nav.faq">常见问题</a></li>
+                        <li><a href="#" data-i18n="footer.nav.query">成绩查询</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 右侧：社交媒体 -->
+                <div class="footer-right">
+                    <h4 class="footer-title" data-i18n="footer.follow.title">关注我们</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="微信">微信</a>
+                        <a href="#" class="social-link" title="微博">微博</a>
+                        <a href="#" class="social-link" title="Facebook">Facebook</a>
+                        <a href="#" class="social-link" title="Twitter">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 底部版权 -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 CSCA Examination Prep | All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入JavaScript文件 -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+
